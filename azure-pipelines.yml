@@ -15,7 +15,7 @@ schedules:
     branches:
       include: 
         - main  # Trigger only on the 'main' branch
-    jobs:
+jobs:
       - job: job1
         steps:
           - script: echo Hello, world!
