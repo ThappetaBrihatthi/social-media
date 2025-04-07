@@ -15,10 +15,11 @@ schedules:
       branches:
         include: 
           - main
-      - job: job1
-        steps:
-          - script: echo Hello, world!
-            displayName: 'Run a one-line script'
+      jobs:
+        - job: job1
+          steps:
+            - script: echo Hello, world!
+              displayName: 'Run a one-line script'
 
 - job: job2
   dependsOn: job1
