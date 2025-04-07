@@ -4,27 +4,28 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  - main  # This triggers the pipeline on changes to the main branch
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-latest  # Use the Ubuntu latest image for the build agent
 
 schedules:
-  - cron: '*/1 * * * *'
-    displayName: 'run every minute'
-      branches:
-        include: 
-          - main
-      jobs:
-        - job: job1
-          steps:
-            - script: echo Hello, world!
-              displayName: 'Run a one-line script'
+  - cron: '* * * * *'  # Valid cron expression to run every minute
+    displayName: 'Run every minute'
+    branches:
+      include: 
+        - main  # Trigger only on the 'main' branch
+    jobs:
+      - job: job1
+        steps:
+          - script: echo Hello, world!
+            displayName: 'Run a one-line script'
 
-- job: job2
-  dependsOn: job1
-  steps:
-  - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+      - job: job2
+        dependsOn: job1  # job2 depends on job1
+        steps:
+          - script: |
+              echo Add other tasks to build, test, and deploy your project.
+              echo See https://aka.ms/yaml
+            displayName: 'Run a multi-line script'
+
